@@ -112,3 +112,8 @@ variable "efs-lifecycle-transition-to-primary-storage-class" {
     type = string
     default = "AFTER_1_ACCESS"  // Move back to primary storage class on first access
 }
+
+variable environment {
+    type = string
+    default = "production"
+}

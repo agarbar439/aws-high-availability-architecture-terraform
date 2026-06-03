@@ -43,6 +43,24 @@ resource "aws_lb_listener" "app_listener" {
     protocol          = var.protocol
 
     default_action {
+        type             = "redirect" // Redirect HTTP to HTTPS
+        redirect {
+            port        = "443" // Redirect to HTTPS port
+            protocol    = "HTTPS" // Redirect to HTTPS protocol
+            status_code = "HTTP_301" // Use HTTP 301 for permanent redirect
+        }
+    }
+}
+
+resource "aws_lb_listener" "app_listener_https" {
+    load_balancer_arn = aws_lb.app_lb.arn // ARN of the ALB
+    port              = 443
+    protocol          = "HTTPS"
+
+    ssl_policy        = "ELBSecurityPolicy-2016-08" // SSL policy for the listener
+    certificate_arn   = aws_acm_certificate.main.arn // ARN of the ACM certificate
+
+    default_action {
         type             = "forward"
         target_group_arn = aws_lb_target_group.app_tg.arn // ARN of the target group
     }

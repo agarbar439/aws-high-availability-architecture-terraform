@@ -12,6 +12,14 @@ resource "aws_security_group" "alb_sg" {
     cidr_blocks = [var.cidr_block]          # Allowed IP address range
   }
 
+  // Allow HTTPS traffic to the ALB
+  ingress {
+    from_port   = 443                     # Port for HTTPS traffic
+    to_port     = 443                     # Port for HTTPS traffic
+    protocol    = "tcp"                  # Protocol 
+    cidr_blocks = [var.cidr_block]          # Allowed IP address range
+  }
+
   // Outbound rules
   egress {
     from_port   = var.port_alb_outbound
