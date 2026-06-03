@@ -79,11 +79,6 @@ This project solves these production challenges holistically by implementing a c
    terraform apply
    ```
  
-5. **Retrieve the ALB endpoint:** Once the apply completes, Terraform prints the public DNS name of the load balancer.
-   ```
-   Outputs:
-     alb_dns_name = "app-alb-123456789.us-east-1.elb.amazonaws.com"
-   ```
    Open that URL in your browser to verify the deployment is live.
 6. **Teardown** (optional): Destroy all provisioned resources when no longer needed.
    ```bash
